@@ -48,7 +48,7 @@ func GetArticleTable(ctx *context.Context) table.Table {
 
 	info.AddField("文章头图", "image", db.Enum).FieldDisplay(func(model types.FieldModel) interface{} {
 		if model.Value != "" {
-			return "<img alt='Responsive image' class='img-rounded' src=/uploads/" + model.Value + ">"
+			return "<img alt='Responsive image' style='width:138px' 'class='img-rounded' src=/uploads/" + model.Value + ">"
 		}
 		return "<span class='label btn btn-info'>" + "暂未上传" + "</span>"
 	})
@@ -89,7 +89,28 @@ func GetArticleTable(ctx *context.Context) table.Table {
 	formList.AddField("文章简介", "info", db.Varchar, form.Text)
 	formList.AddField("文章头图", "image", db.Varchar, form.File)
 	formList.AddField("文章内容", "content", db.Text, form.RichText)
-	formList.AddField("文章标签", "label", db.Varchar, form.Text)
+
+	formList.AddField("文章标签", "label", db.Int, form.Select).
+		// 多选的选项，text代表显示内容，value代表对应值
+		FieldOptions(types.FieldOptions{
+			{
+				Text:  "beer",
+				Value: "0",
+			}, {
+				Text:  "juice",
+				Value: "1",
+			}, {
+				Text:  "water",
+				Value: "2",
+			}, {
+				Text:  "red bull",
+				Value: "3",
+			},
+		}).
+		// 这里返回一个[]string，对应的值是本列的drink字段的值，即编辑表单时会显示的对应值
+		FieldDisplay(func(model types.FieldModel) interface{} {
+			return []string{"beer"}
+		})
 
 	// 使用 FieldOptions 设置 radio 类型内容
 	formList.AddField("是否为精选文章", "selected_articles_status", db.Enum, form.Radio).

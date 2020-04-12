@@ -21,6 +21,7 @@ func GetArticleLabelTable(ctx *context.Context) table.Table {
 	formList := articleLabelTable.GetForm()
 
 	formList.AddField("Id", "id", db.Int, form.Default).FieldNotAllowAdd()
+
 	formList.AddField("标签名称", "label_name", db.Varchar, form.Text)
 
 	formList.SetTable("article_label").SetTitle("标签库").SetDescription("")
