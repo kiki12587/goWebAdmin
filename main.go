@@ -15,6 +15,7 @@ import (
 	"newgoadmin/article_comment"
 	"newgoadmin/article_label"
 	"newgoadmin/article_statistics"
+	"newgoadmin/article_user_message"
 	envconfig "newgoadmin/src/config"
 	"newgoadmin/users"
 )
@@ -61,12 +62,14 @@ func main() {
 	// 关于Generators，详见 https://github.com/GoAdminGroup/go-admin/blob/master/examples/datamodel/tables.go
 
 	adminPlugin := admin.NewAdmin(datamodel.Generators)
-	adminPlugin.AddGenerator("article", article.GetArticleTable)                                 //文章列表
-	adminPlugin.AddGenerator("article_category", article_category.GetArticleCategoryTable)       //文章分类
-	adminPlugin.AddGenerator("article_comment", article_comment.GetArticleCommentTable)          //文章评论
-	adminPlugin.AddGenerator("article_statistics", article_statistics.GetArticleStatisticsTable) //文章数据
-	adminPlugin.AddGenerator("article_label", article_label.GetArticleLabelTable)                //文章标签
-	adminPlugin.AddGenerator("users", users.GetUsersTable)                                       //作者介绍
+	adminPlugin.AddGenerator("article", article.GetArticleTable)                                      //文章列表
+	adminPlugin.AddGenerator("article_category", article_category.GetArticleCategoryTable)            //文章分类
+	adminPlugin.AddGenerator("article_comment", article_comment.GetArticleCommentTable)               //文章评论
+	adminPlugin.AddGenerator("article_statistics", article_statistics.GetArticleStatisticsTable)      //文章数据
+	adminPlugin.AddGenerator("article_label", article_label.GetArticleLabelTable)                     //文章标签
+	adminPlugin.AddGenerator("users", users.GetUsersTable)                                            //作者介绍
+	adminPlugin.AddGenerator("article_user_message", article_user_message.GetArticleUserMessageTable) //用户留言
+
 	// 增加配置与插件，使用Use方法挂载到Web框架中
 	_ = eng.AddConfig(cfg).AddPlugins(adminPlugin).Use(r)
 

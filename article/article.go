@@ -25,6 +25,7 @@ func GetArticleTable(ctx *context.Context) table.Table {
 	)
 
 	info := articleTable.GetInfo()
+
 	info.AddField("文章ID", "id", db.Int).FieldFilterable()
 	info.AddField("文章标题", "title", db.Varchar).FieldFilterable(types.FilterType{Operator: types.FilterOperatorLike})
 
