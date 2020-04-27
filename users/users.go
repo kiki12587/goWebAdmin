@@ -14,18 +14,18 @@ func GetUsersTable(ctx *context.Context) table.Table {
 	info := usersTable.GetInfo()
 
 	info.AddField("Id", "id", db.Int).FieldFilterable()
-	info.AddField("个人简介", "personal_introduction", db.Text)
+	info.AddField("个人简介", "personal", db.Text)
 	info.AddField("联系我", "contact", db.Text)
-	info.AddField("关于", "about", db.Varchar)
+	info.AddField("关于", "about", db.Text)
 
 	info.SetTable("users").SetTitle("个人简介").SetDescription("")
 
 	formList := usersTable.GetForm()
 
 	formList.AddField("Id", "id", db.Int, form.Default).FieldNotAllowAdd()
-	formList.AddField("个人简介", "personal_introduction", db.Text, form.RichText)
+	formList.AddField("个人简介", "personal", db.Text, form.RichText)
 	formList.AddField("联系我", "contact", db.Text, form.RichText)
-	formList.AddField("关于", "about", db.Varchar, form.RichText)
+	formList.AddField("关于", "about", db.Text, form.RichText)
 
 	formList.SetTable("users").SetTitle("个人简介").SetDescription("")
 

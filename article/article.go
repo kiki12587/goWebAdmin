@@ -55,6 +55,13 @@ func GetArticleTable(ctx *context.Context) table.Table {
 	})
 
 	info.AddField("文章标签", "label", db.Varchar)
+
+	info.AddField("文章标签", "label_name", db.Varchar).FieldJoin(types.Join{
+		Table:     "article_label",
+		Field:     "label",
+		JoinField: "id",
+	})
+
 	//info.AddField("是否为精选文章", "selected_articles_status", db.Enum)
 	info.AddField("是否为精选文章", "selected_articles_status", db.Enum).FieldDisplay(func(model types.FieldModel) interface{} {
 		if model.Value == "0" {
@@ -95,22 +102,19 @@ func GetArticleTable(ctx *context.Context) table.Table {
 		// 多选的选项，text代表显示内容，value代表对应值
 		FieldOptions(types.FieldOptions{
 			{
-				Text:  "beer",
-				Value: "0",
-			}, {
-				Text:  "juice",
+				Text:  "HTML",
 				Value: "1",
 			}, {
-				Text:  "water",
+				Text:  "WEB",
 				Value: "2",
 			}, {
-				Text:  "red bull",
+				Text:  "Golang",
 				Value: "3",
 			},
 		}).
 		// 这里返回一个[]string，对应的值是本列的drink字段的值，即编辑表单时会显示的对应值
 		FieldDisplay(func(model types.FieldModel) interface{} {
-			return []string{"beer"}
+			return []string{"Golang"}
 		})
 
 	// 使用 FieldOptions 设置 radio 类型内容
