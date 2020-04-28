@@ -2,6 +2,7 @@ package main
 
 import (
 	_ "github.com/GoAdminGroup/go-admin/adapter/gin" // 引入适配器，必须引入，如若不引入，则需要自己定义
+	"newgoadmin/article_message"
 
 	"github.com/GoAdminGroup/go-admin/engine"
 	"github.com/GoAdminGroup/go-admin/examples/datamodel"
@@ -69,7 +70,8 @@ func main() {
 	adminPlugin.AddGenerator("article_statistics", article_statistics.GetArticleStatisticsTable)      //文章数据
 	adminPlugin.AddGenerator("article_label", article_label.GetArticleLabelTable)                     //文章标签
 	adminPlugin.AddGenerator("users", users.GetUsersTable)                                            //作者介绍
-	adminPlugin.AddGenerator("article_user_message", article_user_message.GetArticleUserMessageTable) //用户留言
+	adminPlugin.AddGenerator("article_user_message", article_user_message.GetArticleUserMessageTable) //给作者留言
+	adminPlugin.AddGenerator("article_message", article_message.GetArticleMessageTable)               //用户留言
 
 	// 增加配置与插件，使用Use方法挂载到Web框架中
 	_ = eng.AddConfig(cfg).AddPlugins(adminPlugin).Use(r)
