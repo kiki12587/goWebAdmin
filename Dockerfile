@@ -4,8 +4,9 @@ FROM golang:alpine
 ENV GO111MODULE=on \
     CGO_ENABLED=0 \
     GOOS=linux \
-    GOARCH=amd64
-
+    GOARCH=amd64 \
+	GOPROXY="https://goproxy.cn,direct"
+	
 # 移动到工作目录：/home/www/newgoadmin 这个目录 是你项目代码 放在linux上 哪个位置的代码 这是我的目录 你们得修改成自己的
 WORKDIR /home/www/newgoadmin
 
@@ -16,11 +17,13 @@ COPY . .
 RUN go build -o app .
 
 # 移动到用于存放生成的二进制文件的 /dist 目录
+
 WORKDIR /dist
+
 
 # 将二进制文件从 /home/www/newgoadmin 目录复制到这里
 RUN cp /home/www/newgoadmin/app .
-
+RUN cp -r /home/www/newgoadmin/uploads .
 # 声明服务端口
 EXPOSE 9000
 
