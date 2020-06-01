@@ -2,8 +2,6 @@ package main
 
 import (
 	_ "github.com/GoAdminGroup/go-admin/adapter/gin" // 引入适配器，必须引入，如若不引入，则需要自己定义
-	"newgoadmin/article_message"
-
 	"github.com/GoAdminGroup/go-admin/engine"
 	"github.com/GoAdminGroup/go-admin/examples/datamodel"
 	"github.com/GoAdminGroup/go-admin/modules/config"
@@ -16,6 +14,7 @@ import (
 	"newgoadmin/article_category"
 	"newgoadmin/article_comment"
 	"newgoadmin/article_label"
+	"newgoadmin/article_message"
 	"newgoadmin/article_statistics"
 	"newgoadmin/article_user_message"
 	envconfig "newgoadmin/src/config"
